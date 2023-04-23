@@ -149,39 +149,40 @@
                                                         $nomor = 0;
                                                         // $kombinasi[$i] = array_unique((array)$kombinasi[$i], SORT_REGULAR);
                                                         foreach ($kombinasi[$i] as $key => $value) {
-                                                            // if ($value['support_percent'] >= $input_min_support and $value['confidence'] >= $input_minimum_confidence) {
+                                                            if ($value->support > 0) {
+                                                                // if ($value['support_percent'] >= $input_min_support and $value['confidence'] >= $input_minimum_confidence) {
 
-                                                            $nomor++;
-                                                            $color_support = 'text-success';
-                                                            if ($value->support < $input_min_support)
-                                                                $color_support = 'text-danger';
+                                                                $nomor++;
+                                                                $color_support = 'text-success';
+                                                                if ($value->support < $input_min_support)
+                                                                    $color_support = 'text-danger';
 
-                                                            $color_confidence = 'text-success';
-                                                            if ($value->confidence < $input_minimum_confidence)
-                                                                $color_confidence = 'text-danger'; ?>
+                                                                $color_confidence = 'text-success';
+                                                                if ($value->confidence < $input_minimum_confidence)
+                                                                    $color_confidence = 'text-danger'; ?>
 
-                                                            <!-- HTML -->
-                                                            <tr>
-                                                                <td><?php echo $nomor ?></td>
-                                                                <td>
-                                                                    <ul>
-                                                                        <?php
-                                                                        $exp_arr = explode(',', $value->id_obat);
-                                                                        foreach ($exp_arr as $value2) {
-                                                                            if (!empty($this->m_data_obat->read($value2))) {
-                                                                                echo '<li>' . $this->m_data_obat->read($value2)[0]->nama_obat . '</li>';
+                                                                <!-- HTML -->
+                                                                <tr>
+                                                                    <td><?php echo $nomor ?></td>
+                                                                    <td>
+                                                                        <ul>
+                                                                            <?php
+                                                                            $exp_arr = explode(',', $value->id_obat);
+                                                                            foreach ($exp_arr as $value2) {
+                                                                                if (!empty($this->m_data_obat->read($value2))) {
+                                                                                    echo '<li>' . $this->m_data_obat->read($value2)[0]->nama_obat . '</li>';
+                                                                                }
                                                                             }
-                                                                        }
-                                                                        ?>
-                                                                    </ul>
-                                                                </td>
-                                                                <td><?php echo $value->jlm_item ?></td>
-                                                                <td class="<?php echo $color_support ?>"><b><?php echo number_format($value->support, 2, ',', '.') . '%' ?></b></td>
-                                                                <td class="<?php echo $color_confidence ?>"><b><?php echo  number_format($value->confidence, 2, ',', '.') . '%' ?></b></td>
-                                                            </tr>
-                                                            <!-- END HTML -->
+                                                                            ?>
+                                                                        </ul>
+                                                                    </td>
+                                                                    <td><?php echo $value->jlm_item ?></td>
+                                                                    <td class="<?php echo $color_support ?>"><b><?php echo number_format($value->support, 2, ',', '.') . '%' ?></b></td>
+                                                                    <td class="<?php echo $color_confidence ?>"><b><?php echo  number_format($value->confidence, 2, ',', '.') . '%' ?></b></td>
+                                                                </tr>
+                                                                <!-- END HTML -->
                                                         <?php
-                                                            // }
+                                                            }
                                                         }
 
                                                         ?>
