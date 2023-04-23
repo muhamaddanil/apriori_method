@@ -44,7 +44,8 @@ class Data_analisis extends CI_Controller
     {
         // POST
         $input_id_obat                            = $this->input->post('input_id_obat');
-        $tahun                                = $this->input->post('tahun');
+        $tgl_mulai                                = $this->input->post('tgl_mulai');
+        $tgl_selesai                                = $this->input->post('tgl_selesai');
         $jml_obat                             = $this->input->post('jml_obat');
         $jml_kombinasi                        = $this->input->post('jml_kombinasi');
         // $jml_kombinasi                        = 3;
@@ -53,7 +54,8 @@ class Data_analisis extends CI_Controller
 
         // DATA
         $data['input_id_obat']              = $input_id_obat;
-        $data['input_tahun']                  = $tahun;
+        $data['input_tgl_mulai']                  = $tgl_mulai;
+        $data['input_tgl_selesai']                  = $tgl_selesai;
         $data['input_jml_obat']               = $jml_obat;
         $data['input_jml_kombinasi']          = $jml_kombinasi;
         $data['input_min_support']            = $min_support;
@@ -65,8 +67,13 @@ class Data_analisis extends CI_Controller
 
         // $data['data_tahun'] = $this->m_data_pemakaian_obat->read_bulan($tahun);
         $menu['name'] = "Analisis";
-        $arr          = $this->m_data_pemakaian_obat->read_obat_perbulan($tahun);
-        $transaksi          = $this->m_data_pemakaian_obat->read_bulan($tahun, 'a.kode_transaksi');
+        $arr          = $this->m_data_pemakaian_obat->read_obat_perbulan($tgl_mulai, $tgl_selesai);
+        $transaksi          = $this->m_data_pemakaian_obat->read_bulan($tgl_mulai, $tgl_selesai, 'a.kode_transaksi');
+
+        // echo '<pre>';
+        // print_r($arr);
+        // echo '</pre>';
+        // die;
 
         // JIKA DATA KOSONG
         if (!$arr) {
@@ -218,14 +225,14 @@ class Data_analisis extends CI_Controller
             // $data['kombinasi_confidence']         = count($kombinasi_confidence);
             $data['kombinasi']                    = $kombinasi;
 
-            echo '<pre>';
-            print_r($transaksi);
-            echo '</pre>';
+            // echo '<pre>';
+            // print_r($transaksi);
+            // echo '</pre>';
 
-            echo '<pre>';
-            print_r($kombinasi);
-            echo '</pre>';
-            die;
+            // echo '<pre>';
+            // print_r($kombinasi);
+            // echo '</pre>';
+            // die;
             // view
             $this->load->view('_template/header');
             $this->load->view('_template/sidebar', $menu);

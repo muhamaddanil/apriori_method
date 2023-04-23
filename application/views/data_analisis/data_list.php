@@ -54,25 +54,17 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-sm-3">
+                                        <div class="col-12 col-sm-2">
                                             <div class="form-group">
-                                                <label>Bulan</label>
-                                                <input type="month" class="form-control" name="tahun" required value="<?php if (isset($input_tahun)) echo $input_tahun ?>">
-                                                <!-- <select class="form-control" name="tahun" id="" required>
-                                                    <option value="" readonly>--Pilih Tahun--</option>
-                                                    <?php
-                                                    foreach ($data_tahun as $key => $value) { ?>
-                                                        <?php if (isset($input_tahun)) {
-                                                            if ($value->tahun == $input_tahun) { ?>
-                                                                <option value="<?php echo $value->tahun; ?>" selected><?php echo $value->tahun; ?></option>
-                                                            <?php } else { ?>
-                                                                <option value="<?php echo $value->tahun; ?>"><?php echo $value->tahun; ?></option>
-                                                            <?php }
-                                                        } else { ?>
-                                                            <option value="<?php echo $value->tahun; ?>"><?php echo $value->tahun; ?></option>
-                                                        <?php } ?>
-                                                    <?php } ?>
-                                                </select> -->
+                                                <label>Tanggal Mulai</label>
+                                                <input type="date" class="form-control" name="tgl_mulai" required value="<?php if (isset($input_tgl_mulai)) echo $input_tgl_mulai ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-2">
+                                            <div class="form-group">
+                                                <label>Tanggal Selesai</label>
+                                                <input type="date" class="form-control" name="tgl_selesai" required value="<?php if (isset($input_tgl_selesai)) echo $input_tgl_selesai ?>">
+
                                             </div>
                                         </div>
                                         <div class="col-6 col-sm-3">
@@ -81,7 +73,7 @@
                                                 <input type="number" class="form-control" name="jml_kombinasi" placeholder="Kombinasi Maksimal" min="1" max="5" value="<?php if (isset($input_jml_kombinasi)) echo $input_jml_kombinasi ?>" required>
                                             </div>
                                         </div>
-                                        <div class="col-6 col-sm-3">
+                                        <div class="col-6 col-sm-2">
                                             <div class="form-group">
                                                 <label>Minimum Support (%)</label>
                                                 <input type="number" class="form-control" name="min_support" placeholder="Minimum Support" min="1" max="100" value="<?php if (isset($input_min_support)) echo $input_min_support ?>" required>

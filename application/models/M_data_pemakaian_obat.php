@@ -130,12 +130,12 @@ class M_data_pemakaian_obat extends CI_Model
         return null;
     }
 
-    public function read_bulan($bln, $group)
+    public function read_bulan($mulai, $selesai, $group)
     {
-        $this->db->select("*, (select GROUP_CONCAT(c.id_obat ORDER BY c.id_obat ASC) from data_pemakaian_obat c where a.kode_transaksi = c.kode_transaksi and c.tanggal like '%$bln%') as obat");
+        $this->db->select("*, (select GROUP_CONCAT(c.id_obat ORDER BY c.id_obat ASC) from data_pemakaian_obat c where a.kode_transaksi = c.kode_transaksi and DATE_FORMAT(c.tanggal, '%Y-%m-%d') BETWEEN '$mulai' AND '$selesai') as obat");
         $this->db->from('data_pemakaian_obat a');
         $this->db->join('data_obat b', 'a.id_obat = b.id_obat');
-        $this->db->like('a.tanggal', $bln);
+        $this->db->where("DATE_FORMAT(a.tanggal, '%Y-%m-%d') BETWEEN '$mulai' AND '$selesai'");
         $this->db->group_by($group);
 
 
@@ -151,9 +151,9 @@ class M_data_pemakaian_obat extends CI_Model
         return null;
     }
 
-    public function read_obat_perbulan($bln)
+    public function read_obat_perbulan($mulai, $selesai)
     {
-        $this->db->select("*, (select count(b.id_pemakaian) from data_pemakaian_obat b where a.id_obat = b.id_obat and b.tanggal like '%$bln%') as jlm_item");
+        $this->db->select("*, (select count(b.id_pemakaian) from data_pemakaian_obat b where a.id_obat = b.id_obat and DATE_FORMAT(b.tanggal, '%Y-%m-%d') BETWEEN '$mulai' AND '$selesai') as jlm_item");
         $this->db->from('data_obat a');
         $this->db->having('jlm_item > 0');
 
